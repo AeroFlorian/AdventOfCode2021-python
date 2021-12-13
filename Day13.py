@@ -1007,7 +1007,7 @@ if __name__ == '__main__':
             z = y[2].split("=")
             instr.append((z[0], int(z[1])))
     #for first star, use
-    #inst = instr[0]
+    #instr = [instr[0]]
     for inst in instr:
         if inst[0] == "x":
             e = set()
