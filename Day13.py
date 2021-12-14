@@ -993,47 +993,78 @@ inputk = """6,10
 fold along y=7
 fold along x=5"""
 
-
-if __name__ == '__main__':
-    inputl=input.split('\n')
+def first_star():
+    inputl = input.split('\n')
     inputm = [x.split(",") for x in inputl if len(x.split(",")) == 2]
-    d=set()
+    d = set()
     for x in inputm:
         d.add((int(x[0]), int(x[1])))
-    instr =[]
+    instr = []
     for x in inputl:
         y = x.split(" ")
         if len(y) == 3:
             z = y[2].split("=")
             instr.append((z[0], int(z[1])))
-    #for first star, use
-    #instr = [instr[0]]
+    instr = [instr[0]]
     for inst in instr:
         if inst[0] == "x":
             e = set()
-            for x,y in d:
+            for x, y in d:
                 if x < inst[1]:
-                    e.add((x,y))
+                    e.add((x, y))
                 elif x > inst[1]:
-                    e.add((2*inst[1] - x, y))
+                    e.add((2 * inst[1] - x, y))
             d = e
         elif inst[0] == "y":
             e = set()
-            for x,y in d:
+            for x, y in d:
                 if y < inst[1]:
                     e.add((x, y))
                 elif y > inst[1]:
-                    e.add(( x,2 * inst[1] -y))
+                    e.add((x, 2 * inst[1] - y))
+            d = e
+    print(f"First star: {len(d)}")
+
+def second_star():
+    inputl = input.split('\n')
+    inputm = [x.split(",") for x in inputl if len(x.split(",")) == 2]
+    d = set()
+    for x in inputm:
+        d.add((int(x[0]), int(x[1])))
+    instr = []
+    for x in inputl:
+        y = x.split(" ")
+        if len(y) == 3:
+            z = y[2].split("=")
+            instr.append((z[0], int(z[1])))
+    for inst in instr:
+        if inst[0] == "x":
+            e = set()
+            for x, y in d:
+                if x < inst[1]:
+                    e.add((x, y))
+                elif x > inst[1]:
+                    e.add((2 * inst[1] - x, y))
+            d = e
+        elif inst[0] == "y":
+            e = set()
+            for x, y in d:
+                if y < inst[1]:
+                    e.add((x, y))
+                elif y > inst[1]:
+                    e.add((x, 2 * inst[1] - y))
             d = e
 
-    print(f"Printing result")
+    print("Second star:")
     for i in range(10):
         st = ""
         for j in range(50):
-            if (j,i) in d:
-                st+="#"
+            if (j, i) in d:
+                st += "#"
             else:
-                st+=" "
+                st += " "
         print(st)
 
-    print(f"Number of dots is {len(d)}")
+if __name__ == '__main__':
+   first_star()
+   second_star()
