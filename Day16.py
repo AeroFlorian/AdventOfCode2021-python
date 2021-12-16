@@ -115,9 +115,9 @@ def parse_packet(decoded, index):
         elif type == 3:
             value = max(l)
         elif type == 5:
-            value = 1 if l[0] >= l[1] else 0
+            value = 1 if l[0] > l[1] else 0
         elif type == 6:
-            value = 1 if l[0] <= l[1] else 0
+            value = 1 if l[0] < l[1] else 0
         elif type == 7:
             value = 1 if l[0] == l[1] else 0
     return (value, index_r)
@@ -132,8 +132,7 @@ def second_star():
     decoded = ""
     for x in input:
         decoded = decoded + get_bin_val(x)
-    #need to figure out why it changed when I rewrote the code
-    print(f"Second star: {parse_packet(decoded, 0)[0]-6870}")
+    print(f"Second star: {parse_packet(decoded, 0)[0]}")
 
 
 
