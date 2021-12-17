@@ -40,7 +40,7 @@ def parse_packet_value(decoded, index):
             index_r += 1
             length = int(decoded[index_r:index_r + len_sub_p], 2)
             index_r += len_sub_p
-            # here no operations on first star
+
             index_u = index_r
             while(index_r < index_u + length):
                 (resadd, add) = parse_packet_value(decoded, index_r)
@@ -51,7 +51,7 @@ def parse_packet_value(decoded, index):
             index_r += 1
             number_sub = int(decoded[index_r:index_r + len_sub_p], 2)
             index_r += len_sub_p
-            # here no operations on first star
+
             for i in range(number_sub):
                 (resadd, add) =  parse_packet_value(decoded, index_r)
                 res+=resadd
@@ -62,9 +62,7 @@ def parse_packet_value(decoded, index):
 def parse_packet(decoded, index):
     if index >= len(decoded) or int(decoded[index:], 2) == 0:
         return (-1, len(decoded))
-    res = 0
     version = int(decoded[index:index + 3], 2)
-    res+= version
     type = int(decoded[index + 3:index + 6], 2)
     index_r = index + 6
     value = 0
@@ -87,7 +85,7 @@ def parse_packet(decoded, index):
             index_r += 1
             length = int(decoded[index_r:index_r + len_sub_p], 2)
             index_r += len_sub_p
-            # here no operations on first star
+
             index_u = index_r
             while(index_r < index_u + length):
                 (resadd, add) = parse_packet(decoded, index_r)
@@ -99,7 +97,7 @@ def parse_packet(decoded, index):
             index_r += 1
             number_sub = int(decoded[index_r:index_r + len_sub_p], 2)
             index_r += len_sub_p
-            # here no operations on first star
+
             for i in range(number_sub):
                 (resadd, add) =  parse_packet(decoded, index_r)
                 if resadd >= 0:
